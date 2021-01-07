@@ -11,7 +11,15 @@
         <div id="myBoard" style="width: 400px"></div>
         <button id="startBtn">Start Position</button>
         <script>
-        var board = Chessboard('myBoard', 'start')
+        import "./chess.js"
+        var mygame = new Chess()
+        var config = {
+            draggable: true,
+            dropOffBoard: 'trash',
+            sparePieces: true
+        } 
+        $(startBtn).on('Click', myBoard.start)
+        var board = Chessboard('myBoard', config)
         </script>     
     </body>
 </html>
