@@ -1,9 +1,7 @@
-<script src="js/chessboard-1.0.0.js"></script>
-
 var board = null
 var newGame = new Chess();
 
-function onStart(source, position, piece, status){
+function onStart(source, piece, position, status){
     if(newGame.game_over()){
         return false
     }
@@ -23,7 +21,27 @@ function randomMoves(){
 }
 
 function moveFromSource(source, destination){
-    newGame.move({
-        to:
+    var newMove = newGame.move({
+        to: destination,
+        from: scource,
+        promotion: 'q'
     })
+    if(newMove == null){
+        return 'snapback'
+    }
+    window.setTimeout(randomMoves, 250)
 }
+
+function updateBoard(){
+    board.position(newGame.fen())
+}
+
+var config = {
+    draggable: true,
+    position: 'start',
+    onDragStart: onStart,
+    onDragMove: moveFromSource,
+    onSnapEnd: updateBoard
+}
+
+board = Chessboard(myBoard, config)
